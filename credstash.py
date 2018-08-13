@@ -923,7 +923,7 @@ def get_parser():
                                  help="the KMS key-id of the master key "
                                  "to use. See the README for more "
                                  "information. Defaults to alias/credstash")
-    parsers[action].add_argument("-c", "--comment", type=str,
+    parsers[action].add_argument("-c", "--comment", type=str, default="comment",
                                  help="Include reference information or a comment about "
                                  "value to be stored.")
     parsers[action].add_argument("-v", "--version", default="1",
@@ -965,6 +965,9 @@ def get_parser():
                                  help="Put a specific version of the "
                                       "credential (update the credential; "
                                       "defaults to version `1`).")
+    parsers[action].add_argument("-c", "--comment", type=str, default="comment",
+                                 help="Include reference information or a comment about "
+                                 "value to be stored.")
     parsers[action].add_argument("-a", "--autoversion", action="store_true",
                                  help="Automatically increment the version of "
                                       "the credential to be stored. This option "
