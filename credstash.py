@@ -333,8 +333,9 @@ def keep_highest_version(secrets):
     return results
 
 
-def getAllSecrets(version="", region=None, table="credential-store",
-                  context=None, credential=None, session=None, **kwargs):
+def getAllSecrets(version="", region=None, table="credential-store", filter_keys = None,
+                  context=None, credential=None, session=None,
+                  **kwargs):
     '''
     fetch and decrypt all secrets
     '''
@@ -346,6 +347,10 @@ def getAllSecrets(version="", region=None, table="credential-store",
     if not version:
         # Just keep the highest version
         secrets = keep_highest_version(secrets)
+
+    # Only keep the keys requested
+    if filter_keys and len(filter_keys) > 0:
+        secrets = filter(lambda x: x['name'] in filter_keys, secrets)
 
     # Only return the secrets that match the pattern in `credential`
     # This already works out of the box with the CLI get action,
