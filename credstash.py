@@ -419,7 +419,7 @@ def putSecretAction(args, region, **session_params):
                      kms_key=args.key, region=region, table=args.table,
                      context=args.context, digest=args.digest, comment=args.comment,
                      **session_params):
-            print("{0} has been stored".format(args.credential))
+            print("{0}:{1} has been stored".format(args.credential, version))
     except KmsError as e:
         fatal(e)
     except botocore.exceptions.ClientError as e:
